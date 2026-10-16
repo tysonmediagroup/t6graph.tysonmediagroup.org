@@ -17,5 +17,8 @@
     "frequency-visualizer"
   ],
   "author": "TYSON Media Group",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "google-trends-api": "^4.9.2"
+  }
 }
