@@ -37,7 +37,21 @@
   };
 
   // ---------------------------------------------------------------------------
-  // 2. DOM Elements
+  // 2. Canvas Sizing & Margin Constants
+  // ---------------------------------------------------------------------------
+  let dpr = window.devicePixelRatio || 1;
+  let width = 0;
+  let height = 0;
+
+  const margin = {
+    top: 95,
+    right: 40,
+    bottom: 50,
+    left: 65
+  };
+
+  // ---------------------------------------------------------------------------
+  // 3. DOM Elements
   // ---------------------------------------------------------------------------
   const canvas = document.getElementById('graphCanvas');
   const ctx = canvas.getContext('2d');
@@ -70,8 +84,21 @@
   const replayIntroBtn = document.getElementById('replay-intro-btn');
   const animatedPage = document.querySelector('.intro-animated-page');
 
+  function resizeCanvas() {
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    renderGraph();
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+
   // ---------------------------------------------------------------------------
-  // 3. Settings & Multi-Theme Engine
+  // 4. Settings & Multi-Theme Engine
   // ---------------------------------------------------------------------------
   function applyTheme(themeName) {
     state.theme = themeName;
@@ -86,7 +113,9 @@
       }
     });
 
-    renderGraph();
+    if (width > 0 && height > 0) {
+      renderGraph();
+    }
   }
 
   applyTheme(state.theme);
@@ -121,10 +150,16 @@
   });
 
   // ---------------------------------------------------------------------------
-  // 4. Launch Intro Animation (Font-Ready Guard & High-Speed Trace)
+  // 5. Launch Intro Animation (Font-Ready Guard & High-Speed Trace)
   // ---------------------------------------------------------------------------
   function triggerTraceSequence() {
     if (!animatedPage) return;
+
+    // Fallback safety timer so intro-complete ALWAYS triggers even if fonts take long
+    const safetyTimer = setTimeout(() => {
+      animatedPage.classList.add('intro-complete');
+      setTimeout(resizeCanvas, 50);
+    }, 2000);
 
     const fontLoadPromise = (document.fonts && document.fonts.load)
       ? Promise.all([
@@ -149,13 +184,15 @@
       }
 
       setTimeout(() => {
+        clearTimeout(safetyTimer);
         animatedPage.classList.add('intro-complete');
-        setTimeout(resizeCanvas, 100);
+        setTimeout(resizeCanvas, 50);
       }, 1850);
     }).catch(() => {
       setTimeout(() => {
+        clearTimeout(safetyTimer);
         animatedPage.classList.add('intro-complete');
-        setTimeout(resizeCanvas, 100);
+        setTimeout(resizeCanvas, 50);
       }, 1850);
     });
   }
@@ -170,32 +207,6 @@
       triggerTraceSequence();
     });
   }
-
-  // ---------------------------------------------------------------------------
-  // 5. Canvas Sizing
-  // ---------------------------------------------------------------------------
-  let dpr = window.devicePixelRatio || 1;
-  let width = 0;
-  let height = 0;
-
-  const margin = {
-    top: 95,
-    right: 40,
-    bottom: 50,
-    left: 65
-  };
-
-  function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    renderGraph();
-  }
-
-  window.addEventListener('resize', resizeCanvas);
 
   // ---------------------------------------------------------------------------
   // 6. Fetch Real Google Trends Timeline Data
