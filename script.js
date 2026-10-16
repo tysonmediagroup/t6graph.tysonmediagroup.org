@@ -1,7 +1,9 @@
 /**
- * TYSON MEDIA GROUP // PROJECT T6: GRAPH
- * Zero Hallucination Engine: Renders 100% Genuine Google Trends Timeline Data
- * Subdomain: t6graph.tysonmediagroup.org
+ * TYSON Media Group // PROJECT T6: GRAPH (t6graph.tysonmediagroup.org)
+ * Unified Framework Engine:
+ * 1. Multi-Theme Engine (Noir Midnight, Nintendo Wii, Frutiger Aero, Nature Botanical)
+ * 2. Launch Intro Trace Sequence & Settings Modal Controller
+ * 3. Zero-Hallucination Google Trends Time-Series Graph Engine (24H, 7D, 30D, 12M, 5Y, LIVE)
  */
 
 (function () {
@@ -14,9 +16,10 @@
     primaryTerm: 'tyson',
     secondaryTerm: 'media',
     compareActive: false,
-    timeframe: '24H', // 24H | 7D | 30D | 12M | LIVE
+    timeframe: '24H', // 24H | 7D | 30D | 12M | 5Y | LIVE
     isLoading: false,
     isRealData: false,
+    theme: localStorage.getItem('tyson_theme') || 'noir',
 
     // Real data arrays directly from Google Trends
     points: [], // Array of { label, fullTime, value, compareValue }
@@ -45,6 +48,7 @@
   const btnToggleCompare = document.getElementById('btnToggleCompare');
   const suggestDropdown = document.getElementById('suggestDropdown');
   const timeframeButtons = document.querySelectorAll('.btn-timeframe');
+  const presetPills = document.querySelectorAll('.preset-pill');
 
   const displayTerm = document.getElementById('displayTerm');
   const displaySub = document.getElementById('displaySub');
@@ -57,15 +61,125 @@
   const tooltipTime = document.getElementById('tooltipTime');
   const tooltipVal = document.getElementById('tooltipVal');
 
+  // Settings & Intro Elements
+  const settingsModal = document.getElementById('settings-modal');
+  const settingsToggleBtn = document.getElementById('settings-toggle-btn');
+  const settingsCloseBtn = document.getElementById('settings-modal-close-btn');
+  const settingsDoneBtn = document.getElementById('settings-done-btn');
+  const themeOptionCards = document.querySelectorAll('.theme-option-card');
+  const replayIntroBtn = document.getElementById('replay-intro-btn');
+  const animatedPage = document.querySelector('.intro-animated-page');
+
   // ---------------------------------------------------------------------------
-  // 3. Canvas Sizing
+  // 3. Settings & Multi-Theme Engine
+  // ---------------------------------------------------------------------------
+  function applyTheme(themeName) {
+    state.theme = themeName;
+    document.documentElement.setAttribute('data-theme', themeName);
+    localStorage.setItem('tyson_theme', themeName);
+
+    themeOptionCards.forEach(card => {
+      if (card.getAttribute('data-theme-choice') === themeName) {
+        card.classList.add('selected');
+      } else {
+        card.classList.remove('selected');
+      }
+    });
+
+    renderGraph();
+  }
+
+  applyTheme(state.theme);
+
+  if (settingsToggleBtn && settingsModal) {
+    settingsToggleBtn.addEventListener('click', () => {
+      settingsModal.classList.add('active');
+      settingsModal.setAttribute('aria-hidden', 'false');
+    });
+  }
+
+  function closeSettingsModal() {
+    if (settingsModal) {
+      settingsModal.classList.remove('active');
+      settingsModal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  if (settingsCloseBtn) settingsCloseBtn.addEventListener('click', closeSettingsModal);
+  if (settingsDoneBtn) settingsDoneBtn.addEventListener('click', closeSettingsModal);
+  if (settingsModal) {
+    settingsModal.addEventListener('click', (e) => {
+      if (e.target === settingsModal) closeSettingsModal();
+    });
+  }
+
+  themeOptionCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const choice = card.getAttribute('data-theme-choice');
+      applyTheme(choice);
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  // 4. Launch Intro Animation (Font-Ready Guard & High-Speed Trace)
+  // ---------------------------------------------------------------------------
+  function triggerTraceSequence() {
+    if (!animatedPage) return;
+
+    const fontLoadPromise = (document.fonts && document.fonts.load)
+      ? Promise.all([
+          document.fonts.load('italic 78px "Cormorant Garamond"'),
+          document.fonts.ready
+        ])
+      : Promise.resolve();
+
+    fontLoadPromise.then(() => {
+      const traceChars = document.querySelectorAll('.trace-char');
+      traceChars.forEach(ch => {
+        ch.style.animation = 'none';
+        void ch.offsetWidth;
+        ch.style.animation = '';
+      });
+
+      const svgHero = document.querySelector('.domain-hero-svg');
+      if (svgHero) {
+        svgHero.style.animation = 'none';
+        void svgHero.offsetWidth;
+        svgHero.style.animation = '';
+      }
+
+      setTimeout(() => {
+        animatedPage.classList.add('intro-complete');
+        setTimeout(resizeCanvas, 100);
+      }, 1850);
+    }).catch(() => {
+      setTimeout(() => {
+        animatedPage.classList.add('intro-complete');
+        setTimeout(resizeCanvas, 100);
+      }, 1850);
+    });
+  }
+
+  triggerTraceSequence();
+
+  if (replayIntroBtn && animatedPage) {
+    replayIntroBtn.addEventListener('click', () => {
+      closeSettingsModal();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      animatedPage.classList.remove('intro-complete');
+      triggerTraceSequence();
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // 5. Canvas Sizing
   // ---------------------------------------------------------------------------
   let dpr = window.devicePixelRatio || 1;
   let width = 0;
   let height = 0;
 
   const margin = {
-    top: 90,
+    top: 95,
     right: 40,
     bottom: 50,
     left: 65
@@ -77,14 +191,14 @@
     height = rect.height;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
-    ctx.scale(dpr, dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     renderGraph();
   }
 
   window.addEventListener('resize', resizeCanvas);
 
   // ---------------------------------------------------------------------------
-  // 4. Fetch Real Google Trends Timeline Data
+  // 6. Fetch Real Google Trends Timeline Data
   // ---------------------------------------------------------------------------
   let fetchController = null;
 
@@ -115,7 +229,6 @@
           const val1 = Array.isArray(pt.value) ? pt.value[0] : 0;
           const val2 = (Array.isArray(pt.value) && pt.value.length > 1) ? pt.value[1] : 0;
 
-          // Simplify axis time for readability
           let label = pt.formattedAxisTime || pt.formattedTime || '';
           if (label.includes(' at ')) {
             label = label.split(' at ')[1].replace(':00', '');
@@ -149,7 +262,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 5. Google Autocomplete Suggest Integration
+  // 7. Google Autocomplete Suggest Integration & Preset Pills
   // ---------------------------------------------------------------------------
   let suggestTimer = null;
 
@@ -186,6 +299,7 @@
         queryInput.value = item;
         state.primaryTerm = item;
         suggestDropdown.classList.remove('active');
+        syncPresetPill(item);
         fetchRealGoogleTrends(item, state.secondaryTerm, state.timeframe);
       });
       suggestDropdown.appendChild(row);
@@ -193,7 +307,27 @@
     suggestDropdown.classList.add('active');
   }
 
-  // Input listeners
+  function syncPresetPill(term) {
+    presetPills.forEach(pill => {
+      if (pill.dataset.term.toLowerCase() === term.toLowerCase()) {
+        pill.classList.add('active');
+      } else {
+        pill.classList.remove('active');
+      }
+    });
+  }
+
+  presetPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      presetPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const term = pill.dataset.term;
+      queryInput.value = term;
+      state.primaryTerm = term;
+      fetchRealGoogleTrends(term, state.secondaryTerm, state.timeframe);
+    });
+  });
+
   queryInput.addEventListener('input', (e) => {
     const val = e.target.value;
     clearTimeout(suggestTimer);
@@ -201,6 +335,7 @@
       fetchSuggestions(val);
       if (val.trim()) {
         state.primaryTerm = val.trim();
+        syncPresetPill(state.primaryTerm);
         fetchRealGoogleTrends(state.primaryTerm, state.secondaryTerm, state.timeframe);
       }
     }, 400);
@@ -210,6 +345,7 @@
     if (e.key === 'Enter') {
       suggestDropdown.classList.remove('active');
       state.primaryTerm = queryInput.value.trim();
+      syncPresetPill(state.primaryTerm);
       fetchRealGoogleTrends(state.primaryTerm, state.secondaryTerm, state.timeframe);
     }
   });
@@ -229,7 +365,7 @@
   });
 
   // ---------------------------------------------------------------------------
-  // 6. Timeframe Range Selector & Live Stream
+  // 8. Timeframe Range Selector & Live Stream
   // ---------------------------------------------------------------------------
   timeframeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -245,7 +381,6 @@
       fetchRealGoogleTrends(state.primaryTerm, state.secondaryTerm, state.timeframe);
 
       if (state.timeframe === 'LIVE') {
-        // Poll Google Trends every 20 seconds for real-time live pulse
         state.liveTimer = setInterval(() => {
           fetchRealGoogleTrends(state.primaryTerm, state.secondaryTerm, 'LIVE');
         }, 20000);
@@ -269,7 +404,7 @@
   });
 
   // ---------------------------------------------------------------------------
-  // 7. Telemetry HUD Updater
+  // 9. Telemetry HUD Updater
   // ---------------------------------------------------------------------------
   function updateHUD() {
     displayTerm.textContent = state.primaryTerm;
@@ -298,8 +433,58 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 8. Canvas Rendering Engine: Time Left-to-Right, Search 0-100 Down-to-Up
+  // 10. Theme-Aware Canvas Rendering Engine
   // ---------------------------------------------------------------------------
+  function getThemeColors() {
+    if (state.theme === 'wii') {
+      return {
+        primaryStroke: '#00a6e2',
+        primaryGlow: 'rgba(0, 166, 226, 0.35)',
+        primaryFill: 'rgba(0, 166, 226, 0.12)',
+        secondaryStroke: '#475569',
+        secondaryFill: 'rgba(71, 85, 105, 0.06)',
+        gridBase: 'rgba(15, 23, 42, 0.25)',
+        gridLine: 'rgba(15, 23, 42, 0.06)',
+        axisText: '#475569'
+      };
+    }
+    if (state.theme === 'frutiger') {
+      return {
+        primaryStroke: '#38bdf8',
+        primaryGlow: 'rgba(56, 189, 248, 0.45)',
+        primaryFill: 'rgba(56, 189, 248, 0.14)',
+        secondaryStroke: '#e2e8f0',
+        secondaryFill: 'rgba(226, 232, 240, 0.05)',
+        gridBase: 'rgba(255, 255, 255, 0.25)',
+        gridLine: 'rgba(255, 255, 255, 0.06)',
+        axisText: '#94a3b8'
+      };
+    }
+    if (state.theme === 'nature') {
+      return {
+        primaryStroke: '#86efac',
+        primaryGlow: 'rgba(134, 239, 172, 0.4)',
+        primaryFill: 'rgba(134, 239, 172, 0.1)',
+        secondaryStroke: '#cbd5e1',
+        secondaryFill: 'rgba(203, 213, 225, 0.04)',
+        gridBase: 'rgba(255, 255, 255, 0.25)',
+        gridLine: 'rgba(255, 255, 255, 0.06)',
+        axisText: '#86efac'
+      };
+    }
+    // Default Noir (Midnight Monochrome)
+    return {
+      primaryStroke: '#ffffff',
+      primaryGlow: 'rgba(255, 255, 255, 0.4)',
+      primaryFill: 'rgba(255, 255, 255, 0.08)',
+      secondaryStroke: '#98a2b3',
+      secondaryFill: 'rgba(152, 162, 179, 0.04)',
+      gridBase: 'rgba(255, 255, 255, 0.25)',
+      gridLine: 'rgba(255, 255, 255, 0.05)',
+      axisText: '#717a8a'
+    };
+  }
+
   function renderGraph() {
     ctx.clearRect(0, 0, width, height);
 
@@ -308,20 +493,21 @@
 
     if (plotW <= 0 || plotH <= 0) return;
 
+    const palette = getThemeColors();
+
     // 1. Draw Grid Lines and Y-Axis (0 to 100 from down to up)
     ctx.save();
     ctx.font = '100 11px Roboto, sans-serif';
-    ctx.fillStyle = '#667085';
+    ctx.fillStyle = palette.axisText;
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
 
     const yLevels = [0, 25, 50, 75, 100];
 
     yLevels.forEach(val => {
-      // 0 is down at margin.top + plotH; 100 is up at margin.top
       const y = margin.top + plotH - (val / 100) * plotH;
 
-      ctx.strokeStyle = val === 0 ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255, 255, 255, 0.05)';
+      ctx.strokeStyle = val === 0 ? palette.gridBase : palette.gridLine;
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(margin.left, y);
@@ -336,7 +522,7 @@
     ctx.translate(18, margin.top + plotH / 2);
     ctx.rotate(-Math.PI / 2);
     ctx.font = '100 9px Roboto, sans-serif';
-    ctx.fillStyle = '#475467';
+    ctx.fillStyle = palette.axisText;
     ctx.letterSpacing = '0.25em';
     ctx.textAlign = 'center';
     ctx.fillText('GOOGLE SEARCH INTEREST (0 - 100)', 0, 0);
@@ -345,7 +531,7 @@
     // If loading or empty
     if (state.isLoading) {
       ctx.font = '100 13px Roboto, sans-serif';
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = palette.primaryStroke;
       ctx.textAlign = 'center';
       ctx.fillText('QUERYING GOOGLE TRENDS DATABASE...', margin.left + plotW / 2, margin.top + plotH / 2);
       ctx.restore();
@@ -354,7 +540,7 @@
 
     if (!state.points || state.points.length < 2) {
       ctx.font = '100 13px Roboto, sans-serif';
-      ctx.fillStyle = '#475467';
+      ctx.fillStyle = palette.axisText;
       ctx.textAlign = 'center';
       ctx.fillText('NO GOOGLE TRENDS DATA AVAILABLE', margin.left + plotW / 2, margin.top + plotH / 2);
       ctx.restore();
@@ -373,26 +559,26 @@
       const x = margin.left + i * stepX;
 
       if (i % labelStep === 0 || i === points.length - 1) {
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+        ctx.strokeStyle = palette.gridLine;
         ctx.beginPath();
         ctx.moveTo(x, margin.top);
         ctx.lineTo(x, margin.top + plotH);
         ctx.stroke();
 
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.strokeStyle = palette.gridBase;
         ctx.beginPath();
         ctx.moveTo(x, margin.top + plotH);
         ctx.lineTo(x, margin.top + plotH + 5);
         ctx.stroke();
 
-        ctx.fillStyle = '#667085';
+        ctx.fillStyle = palette.axisText;
         ctx.fillText(points[i].label, x, margin.top + plotH + 9);
       }
     }
 
     // X-Axis Sub-label
     ctx.font = '100 9px Roboto, sans-serif';
-    ctx.fillStyle = '#475467';
+    ctx.fillStyle = palette.axisText;
     ctx.letterSpacing = '0.2em';
     ctx.textAlign = 'right';
     ctx.fillText('TIME ELAPSED • LEFT TO RIGHT', margin.left + plotW, margin.top + plotH + 28);
@@ -401,24 +587,26 @@
     // 3. Draw Comparison Curve (if active)
     if (state.compareActive) {
       drawDataCurve(points, 'compareValue', plotW, plotH, {
-        strokeColor: '#98a2b3',
+        strokeColor: palette.secondaryStroke,
+        glowColor: 'transparent',
         lineWidth: 1.6,
         isDashed: true,
-        gradientBottom: 'rgba(152, 162, 179, 0.04)'
+        gradientBottom: palette.secondaryFill
       });
     }
 
-    // 4. Draw Primary Curve (Real Google Trends Points, Pure White)
+    // 4. Draw Primary Curve (Real Google Trends Points)
     drawDataCurve(points, 'value', plotW, plotH, {
-      strokeColor: '#ffffff',
+      strokeColor: palette.primaryStroke,
+      glowColor: palette.primaryGlow,
       lineWidth: 2.2,
       isDashed: false,
-      gradientBottom: 'rgba(255, 255, 255, 0.08)'
+      gradientBottom: palette.primaryFill
     });
 
     // 5. Draw Interactive Crosshair on Hover
     if (state.mouse.active && state.mouse.closestIndex >= 0) {
-      drawCrosshair(plotW, plotH, stepX);
+      drawCrosshair(plotW, plotH, stepX, palette);
     }
   }
 
@@ -472,7 +660,7 @@
       ctx.setLineDash([5, 4]);
     } else {
       ctx.setLineDash([]);
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
+      ctx.shadowColor = style.glowColor;
       ctx.shadowBlur = 8;
     }
     ctx.stroke();
@@ -480,7 +668,7 @@
     ctx.restore();
   }
 
-  function drawCrosshair(plotW, plotH, stepX) {
+  function drawCrosshair(plotW, plotH, stepX, palette) {
     const idx = state.mouse.closestIndex;
     const pt = state.points[idx];
     if (!pt) return;
@@ -491,7 +679,7 @@
     ctx.save();
 
     // Dotted vertical line
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+    ctx.strokeStyle = palette.gridBase;
     ctx.lineWidth = 1;
     ctx.setLineDash([3, 3]);
     ctx.beginPath();
@@ -501,15 +689,15 @@
 
     // Target Dot
     ctx.setLineDash([]);
-    ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = '#ffffff';
+    ctx.fillStyle = palette.primaryStroke;
+    ctx.shadowColor = palette.primaryStroke;
     ctx.shadowBlur = 10;
     ctx.beginPath();
     ctx.arc(x, y, 4.5, 0, Math.PI * 2);
     ctx.fill();
 
     // Target Ring
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.strokeStyle = palette.gridBase;
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.arc(x, y, 9, 0, Math.PI * 2);
@@ -517,10 +705,9 @@
 
     ctx.restore();
 
-    // Position HTML tooltip
-    const canvasRect = canvas.getBoundingClientRect();
-    const tooltipX = canvasRect.left + x + 15;
-    const tooltipY = canvasRect.top + y - 45;
+    // Position HTML tooltip inside stage bounds
+    const tooltipX = Math.min(width - 260, Math.max(20, x + 15));
+    const tooltipY = Math.max(20, y - 55);
 
     graphTooltip.style.left = `${tooltipX}px`;
     graphTooltip.style.top = `${tooltipY}px`;
@@ -529,13 +716,13 @@
     tooltipTime.textContent = `${pt.fullTime || pt.label} • REAL GOOGLE TIMESTAMP`;
     let valText = `${state.primaryTerm.toUpperCase()}: <span style="font-weight: 500;">${pt.value}</span> / 100`;
     if (state.compareActive) {
-      valText += ` &bull; ${state.secondaryTerm.toUpperCase()}: <span style="color: #98a2b3;">${pt.compareValue}</span> / 100`;
+      valText += ` &bull; ${state.secondaryTerm.toUpperCase()}: <span style="opacity: 0.75;">${pt.compareValue}</span> / 100`;
     }
     tooltipVal.innerHTML = valText;
   }
 
   // ---------------------------------------------------------------------------
-  // 9. Mouse Hover Interaction
+  // 11. Mouse Hover Interaction
   // ---------------------------------------------------------------------------
   canvas.addEventListener('mousemove', (e) => {
     const rect = canvas.getBoundingClientRect();
@@ -568,7 +755,7 @@
   });
 
   // ---------------------------------------------------------------------------
-  // 10. Initial Startup
+  // 12. Initial Startup
   // ---------------------------------------------------------------------------
   resizeCanvas();
   queryInput.value = state.primaryTerm;

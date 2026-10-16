@@ -1,153 +1,411 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="intro-animated-page" data-theme="noir">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PROJECT T6 // GRAPH &bull; TYSON Media Group</title>
-  <meta name="description" content="T6 Search Interest Time-Series Graph. Tracking Google search volume over time from left to right. t6graph.tysonmediagroup.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://t6graph.tysonmediagroup.org">
+    <title>PROJECT T6 // GRAPH | t6graph.tysonmediagroup.org &bull; Stillness in Motion</title>
+    <meta name="description" content="TYSON Media Group - PROJECT T6 Search Interest Time-Series Graph. Real-time Google Trends telemetry from left to right. Ad Astra Per Aspera &bull; Stillness in Motion.">
 
-  <!-- Google Fonts: Cormorant Garamond & Super-Thin Roboto -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css">
+    <!-- Critical Asset Preloads -->
+    <link rel="preload" as="image" href="assets/LOGOSFORGEMINI/TYSONMediaGroupBanner.png" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/logoforbottomofintrotrace.png" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500&family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Nunito:wght@400;600;700;800&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=50">
 </head>
 <body>
+    <!-- Single Global Header (Clean, High-Contrast & Rock-Solid) -->
+    <header class="main-header" id="header">
+        <div class="header-inner">
+            <a href="#home" class="brand-logo">
+                <img src="assets/LOGOSFORGEMINI/TYSONMediaGroupBanner.png" alt="TYSON Media Group" class="logo-img">
+            </a>
 
-  <!-- Atmospheric Noir Backdrop -->
-  <div class="noir-backdrop"></div>
+            <nav class="main-nav" id="main-nav">
+                <a href="#home" class="nav-link active">Telemetry Graph</a>
+                <a href="https://tysonmediagroup.org" target="_blank" class="nav-link">Corporate Portal &nearr;</a>
+                <a href="https://atlantis.tysonmediagroup.org" target="_blank" class="nav-link">Atlantis &nearr;</a>
+                <a href="https://rpm.tysonmediagroup.org" target="_blank" class="nav-link">RPM World &nearr;</a>
+            </nav>
 
-  <!-- App Shell -->
-  <div class="app-shell">
-
-    <!-- Header -->
-    <header class="brand-nav">
-      <div class="brand-identity">
-        <img src="assets/TYSONMediaGroupBanner.png" alt="TYSON Media Group" class="brand-logo-img">
-        <div class="brand-titles">
-          <span class="brand-series">PROJECT T6 &bull; TIME-SERIES RADAR</span>
-          <h1 class="brand-name">Search Interest Graph</h1>
+            <div class="header-actions">
+                <!-- Sleek Settings Gear Button -->
+                <button class="settings-toggle-btn" id="settings-toggle-btn" title="Site Settings & Preferences" aria-label="Settings">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span>Settings</span>
+                </button>
+            </div>
         </div>
-      </div>
-
-      <div class="nav-system-status">
-        <div class="status-pill">
-          <span class="status-beacon"></span>
-          <span>EDGE TELEMETRY ONLINE</span>
-        </div>
-        <span>T6GRAPH.TYSONMEDIAGROUP.ORG</span>
-      </div>
     </header>
 
-    <!-- Controls Strip -->
-    <section class="control-strip">
-      <div class="search-group">
-        <!-- Primary Search Term -->
-        <div class="search-box">
-          <span class="search-label">QUERY //</span>
-          <input 
-            type="text" 
-            id="queryInput" 
-            class="search-input" 
-            placeholder="Enter search term..." 
-            autocomplete="off"
-            spellcheck="false"
-            value="Tyson Media Group"
-          >
-          <div id="suggestDropdown" class="suggest-dropdown"></div>
+    <main id="spa-main-content">
+        <div id="view-home" class="page-view active-view">
+            <!-- Hero Section with Traced 't6graph.tysonmediagroup.org' Title & 'Stillness in Motion' -->
+            <section class="hero-section" style="padding: 3.5rem 0 2rem;">
+                <div class="container-wide hero-container">
+                    <!-- Top Tag in Cormorant Garamond: Ad Astra Per Aspera -->
+                    <div class="hero-tag-wrap">
+                        <span class="editorial-tag">Ad Astra Per Aspera &bull; Project T6</span>
+                    </div>
+
+                    <!-- Centerpiece Title: Traces out letter-by-letter smoothly, fills in, glows, and remains -->
+                    <div class="hero-domain-stage">
+                        <svg class="domain-hero-svg" viewBox="0 0 1240 110" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <style>
+                                    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&amp;display=block');
+                                    .domain-hero-text {
+                                        font-family: 'Cormorant Garamond', Georgia, serif !important;
+                                        font-style: italic !important;
+                                    }
+                                </style>
+                            </defs>
+                            <text x="50%" y="62%" text-anchor="middle" dominant-baseline="middle" class="domain-hero-text">
+                                <tspan class="trace-char trace-c1">t</tspan><tspan class="trace-char trace-c2">6</tspan><tspan class="trace-char trace-c3">g</tspan><tspan class="trace-char trace-c4">r</tspan><tspan class="trace-char trace-c5">a</tspan><tspan class="trace-char trace-c6">p</tspan><tspan class="trace-char trace-c7">h</tspan><tspan class="trace-char trace-c8">.</tspan><tspan class="trace-char trace-c9">t</tspan><tspan class="trace-char trace-c10">y</tspan><tspan class="trace-char trace-c11">s</tspan><tspan class="trace-char trace-c12">o</tspan><tspan class="trace-char trace-c13">n</tspan><tspan class="trace-char trace-c14">m</tspan><tspan class="trace-char trace-c15">e</tspan><tspan class="trace-char trace-c16">d</tspan><tspan class="trace-char trace-c17">i</tspan><tspan class="trace-char trace-c18">a</tspan><tspan class="trace-char trace-c19">g</tspan><tspan class="trace-char trace-c20">r</tspan><tspan class="trace-char trace-c21">o</tspan><tspan class="trace-char trace-c22">u</tspan><tspan class="trace-char trace-c23">p</tspan><tspan class="trace-char trace-c24">.</tspan><tspan class="trace-char trace-c25">o</tspan><tspan class="trace-char trace-c26">r</tspan><tspan class="trace-char trace-c27">g</tspan>
+                            </text>
+                        </svg>
+                    </div>
+
+                    <!-- Tagline in Cormorant Garamond: Stillness in Motion -->
+                    <h2 class="hero-tagline-title" style="margin-bottom: 0.5rem;">
+                        Stillness in Motion
+                    </h2>
+                </div>
+            </section>
+
+            <!-- Interactive Time-Series Graph Section (Fades in after trace) -->
+            <div class="home-content-section">
+                <section class="t6-graph-section">
+                    <div class="container-wide">
+
+                        <!-- Controls Strip -->
+                        <div class="control-strip">
+                            <div class="search-group">
+                                <!-- Primary Search Term -->
+                                <div class="search-box">
+                                    <span class="search-label">QUERY //</span>
+                                    <input 
+                                        type="text" 
+                                        id="queryInput" 
+                                        class="search-input" 
+                                        placeholder="Enter search term..." 
+                                        autocomplete="off"
+                                        spellcheck="false"
+                                        value="tyson"
+                                    >
+                                    <div id="suggestDropdown" class="suggest-dropdown"></div>
+                                </div>
+
+                                <!-- Secondary Compare Term -->
+                                <div id="compareBox" class="compare-box">
+                                    <span class="search-label">VS //</span>
+                                    <input 
+                                        type="text" 
+                                        id="compareInput" 
+                                        class="search-input" 
+                                        placeholder="Comparison term..." 
+                                        autocomplete="off"
+                                        spellcheck="false"
+                                        value="media"
+                                    >
+                                </div>
+
+                                <button id="btnToggleCompare" class="btn-toggle">+ COMPARE</button>
+                            </div>
+
+                            <!-- Timeframe Selector: Left-to-Right Time Axis Range -->
+                            <div class="timeframe-group">
+                                <button class="btn-timeframe active" data-range="24H">24H</button>
+                                <button class="btn-timeframe" data-range="7D">7D</button>
+                                <button class="btn-timeframe" data-range="30D">30D</button>
+                                <button class="btn-timeframe" data-range="12M">12M</button>
+                                <button class="btn-timeframe" data-range="5Y">5Y</button>
+                                <button class="btn-timeframe" data-range="LIVE">LIVE STREAM</button>
+                            </div>
+                        </div>
+
+                        <!-- Quick Preset Pills -->
+                        <div class="preset-row">
+                            <span class="preset-label">VECTORS //</span>
+                            <button class="preset-pill active" data-term="tyson">tyson</button>
+                            <button class="preset-pill" data-term="formula 1">formula 1</button>
+                            <button class="preset-pill" data-term="porsche">porsche</button>
+                            <button class="preset-pill" data-term="artificial intelligence">artificial intelligence</button>
+                            <button class="preset-pill" data-term="beamng">beamng</button>
+                            <button class="preset-pill" data-term="ford f150">ford f150</button>
+                        </div>
+
+                        <!-- Main Graph Stage -->
+                        <div class="graph-stage">
+                            <canvas id="graphCanvas"></canvas>
+
+                            <!-- Hover Tooltip -->
+                            <div id="graphTooltip" class="graph-tooltip">
+                                <div id="tooltipTime" class="tooltip-time">--:--</div>
+                                <div id="tooltipVal" class="tooltip-val">SEARCH INTEREST: --</div>
+                            </div>
+
+                            <!-- Floating Telemetry HUD -->
+                            <div class="graph-telemetry-hud">
+                                <div class="term-stat-block">
+                                    <span class="term-eyebrow">ACTIVE SEARCH VECTOR</span>
+                                    <div id="displayTerm" class="term-display-title">tyson</div>
+                                    <div id="displaySub" style="font-family: var(--font-roboto); font-weight: 100; font-size: 0.72rem; color: var(--text-dim); letter-spacing: 0.15em;">
+                                        TIME AXIS: PAST 24 HOURS &bull; Y-AXIS: GOOGLE SEARCH INTEREST (0-100)
+                                    </div>
+                                </div>
+
+                                <div class="term-stat-metrics">
+                                    <div class="stat-unit">
+                                        <span class="stat-label">CURRENT INTEREST</span>
+                                        <div class="stat-number"><span id="statCurrent">--</span><span class="stat-suffix">/100</span></div>
+                                    </div>
+                                    <div class="stat-unit">
+                                        <span class="stat-label">PEAK</span>
+                                        <div class="stat-number"><span id="statPeak">--</span><span class="stat-suffix">/100</span></div>
+                                    </div>
+                                    <div class="stat-unit">
+                                        <span class="stat-label">AVERAGE</span>
+                                        <div class="stat-number"><span id="statAvg">--</span><span class="stat-suffix">/100</span></div>
+                                    </div>
+                                    <div class="stat-unit">
+                                        <span class="stat-label">TREND VELOCITY</span>
+                                        <div class="stat-number"><span id="statVelocity">--</span><span class="stat-suffix">%</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
         </div>
-
-        <!-- Secondary Compare Term -->
-        <div id="compareBox" class="compare-box">
-          <span class="search-label">VS //</span>
-          <input 
-            type="text" 
-            id="compareInput" 
-            class="search-input" 
-            placeholder="Comparison term..." 
-            autocomplete="off"
-            spellcheck="false"
-            value="Competitor Benchmark"
-          >
-        </div>
-
-        <button id="btnToggleCompare" class="btn-toggle">+ COMPARE</button>
-      </div>
-
-      <!-- Timeframe Selector: Left-to-Right Time Axis Range -->
-      <div class="timeframe-group">
-        <button class="btn-timeframe active" data-range="24H">24H</button>
-        <button class="btn-timeframe" data-range="7D">7D</button>
-        <button class="btn-timeframe" data-range="30D">30D</button>
-        <button class="btn-timeframe" data-range="12M">12M</button>
-        <button class="btn-timeframe" data-range="5Y">5Y</button>
-        <button class="btn-timeframe" data-range="LIVE">LIVE STREAM</button>
-      </div>
-    </section>
-
-    <!-- Main Graph Stage -->
-    <main class="graph-stage">
-      <canvas id="graphCanvas"></canvas>
-
-      <!-- Hover Tooltip -->
-      <div id="graphTooltip" class="graph-tooltip">
-        <div id="tooltipTime" class="tooltip-time">--:--</div>
-        <div id="tooltipVal" class="tooltip-val">SEARCH INTEREST: --</div>
-      </div>
-
-      <!-- Floating Telemetry HUD -->
-      <div class="graph-telemetry-hud">
-        <div class="term-stat-block">
-          <span class="term-eyebrow">ACTIVE SEARCH VECTOR</span>
-          <div id="displayTerm" class="term-display-title">Tyson Media Group</div>
-          <div id="displaySub" style="font-family: var(--font-roboto); font-weight: 100; font-size: 0.72rem; color: var(--silver-dim); letter-spacing: 0.15em;">
-            TIME AXIS: PAST 24 HOURS &bull; Y-AXIS: GOOGLE SEARCH INTEREST (0-100)
-          </div>
-        </div>
-
-        <div class="term-stat-metrics">
-          <div class="stat-unit">
-            <span class="stat-label">CURRENT INTEREST</span>
-            <div class="stat-number"><span id="statCurrent">88</span><span class="stat-suffix">/100</span></div>
-          </div>
-          <div class="stat-unit">
-            <span class="stat-label">PEAK</span>
-            <div class="stat-number"><span id="statPeak">96</span><span class="stat-suffix">/100</span></div>
-          </div>
-          <div class="stat-unit">
-            <span class="stat-label">AVERAGE</span>
-            <div class="stat-number"><span id="statAvg">71.4</span><span class="stat-suffix">/100</span></div>
-          </div>
-          <div class="stat-unit">
-            <span class="stat-label">TREND VELOCITY</span>
-            <div class="stat-number"><span id="statVelocity">+12.8</span><span class="stat-suffix">%</span></div>
-          </div>
-        </div>
-      </div>
     </main>
 
-    <!-- Project T6 Centerpiece Logo -->
-    <div class="project-t6-centerpiece">
-      <a href="https://t6graph.tysonmediagroup.org" title="PROJECT T6 // TYSON Media Group Framework">
-        <img src="assets/projectT6-logo.png" alt="PROJECT T6" class="project-t6-logo-img">
-      </a>
-      <span class="project-t6-sublabel">TYSON MEDIA GROUP &bull; FRAMEWORK T6</span>
+    <!-- Settings & Appearance Modal -->
+    <div class="settings-modal-overlay" id="settings-modal" aria-hidden="true" role="dialog">
+        <div class="settings-modal-card">
+            <div class="settings-modal-header">
+                <div>
+                    <span class="editorial-tag" style="margin-bottom: 0.25rem; display: block;">SYSTEM PREFERENCES</span>
+                    <h3 class="settings-modal-title">Appearance &amp; Experience</h3>
+                </div>
+                <button class="settings-close-btn" id="settings-modal-close-btn" aria-label="Close Settings">&times;</button>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-section-title">Visual Theme Engine</div>
+                <div class="theme-options-grid">
+                    <!-- Option 1: Noir -->
+                    <div class="theme-option-card selected" data-theme-choice="noir">
+                        <div class="theme-indicator-row">
+                            <span class="theme-option-title">Midnight Noir</span>
+                            <span class="theme-swatch-circle swatch-noir"></span>
+                        </div>
+                        <p class="theme-option-desc">Pure black monochrome, luxury typography, architectural minimalism.</p>
+                    </div>
+
+                    <!-- Option 2: Nintendo Wii -->
+                    <div class="theme-option-card" data-theme-choice="wii">
+                        <div class="theme-indicator-row">
+                            <span class="theme-option-title">Nintendo Wii</span>
+                            <span class="theme-swatch-circle swatch-wii"></span>
+                        </div>
+                        <p class="theme-option-desc">Crisp white &amp; soft gray, Wii cyan accents, tactile channel tiles.</p>
+                    </div>
+
+                    <!-- Option 3: Frutiger Aero -->
+                    <div class="theme-option-card" data-theme-choice="frutiger">
+                        <div class="theme-indicator-row">
+                            <span class="theme-option-title">Frutiger Aero</span>
+                            <span class="theme-swatch-circle swatch-frutiger"></span>
+                        </div>
+                        <p class="theme-option-desc">Glossy glassmorphism, sky aurora gradient, specular reflections &amp; aqua gel buttons.</p>
+                    </div>
+
+                    <!-- Option 4: Nature Botanical -->
+                    <div class="theme-option-card" data-theme-choice="nature">
+                        <div class="theme-indicator-row">
+                            <span class="theme-option-title">Nature Botanical</span>
+                            <span class="theme-swatch-circle swatch-nature"></span>
+                        </div>
+                        <p class="theme-option-desc">Deep evergreen forest, organic sage accents, warm natural earth tone harmony.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Section -->
+            <div class="settings-section" style="margin-bottom: 0;">
+                <div class="settings-section-title">Experience Controls</div>
+                <div class="settings-action-row">
+                    <div>
+                        <div style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--text-white);">Cinematic Intro Sequence</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Replay the signature <code class="brand-tmg-domain">t6graph.tysonmediagroup.org</code> vector trace animation</div>
+                    </div>
+                    <button id="replay-intro-btn" class="btn btn-outline btn-sm">Replay Trace &orarr;</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+                <button class="btn btn-primary" id="settings-done-btn" style="padding: 0.75rem 2rem; font-size: 1.15rem; width: 100%;">Close &amp; Return</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Brand Footer -->
-    <footer class="brand-footer">
-      <div>
-        <span class="footer-domain">T6GRAPH.TYSONMEDIAGROUP.ORG</span>
-        <span>&bull; CLOUDFLARE PAGES EDGE PLATFORM</span>
-      </div>
-      <div>
-        <span style="font-family: var(--font-serif); font-style: italic; font-size: 0.85rem; color: var(--silver-bright);">"Stillness in Motion"</span>
-      </div>
+    <!-- Single Global Footer (100% Consistent Across the tysonmediagroup.org Framework) -->
+    <footer class="main-footer">
+        <div class="container-wide">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="assets/LOGOSFORGEMINI/TYSONMediaGroupBanner.png" alt="TYSON Media Group" class="footer-logo">
+                    <p class="footer-mission">
+                        PROJECT T6 Search Telemetry &amp; Real-Time Trend Intelligence. Part of the official <code class="brand-tmg-domain">tysonmediagroup.org</code> software ecosystem.
+                    </p>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4>Project T6 Suite</h4>
+                    <ul>
+                        <li><a href="https://t6graph.tysonmediagroup.org">t6graph.tysonmediagroup.org</a></li>
+                        <li><a href="https://tysonmediagroup.org" target="_blank">Corporate Flagship &nearr;</a></li>
+                        <li><a href="https://rpm.tysonmediagroup.org" target="_blank">RPM World &nearr;</a></li>
+                        <li><a href="https://tr.tysonmediagroup.org" target="_blank">TYSON Racing &nearr;</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4>Network Properties</h4>
+                    <div class="footer-properties-list">
+                        <a href="https://atlantis.tysonmediagroup.org" target="_blank" class="footer-prop-item">
+                            <img src="assets/LOGOSFORGEMINI/TYSONAtlantisBanner.png" alt="TYSON Atlantis" class="footer-property-img" loading="lazy">
+                        </a>
+                        <a href="https://aviation.tysonmediagroup.org" target="_blank" class="footer-prop-item">
+                            <img src="assets/LOGOSFORGEMINI/TYSONAviationBanner.png" alt="TYSON Aviation" class="footer-property-img" loading="lazy">
+                        </a>
+                        <div class="footer-prop-item" style="gap: 0.75rem; align-items: center;">
+                            <img src="assets/LOGOSFORGEMINI/myt5s_logo.png" alt="myT5S" class="footer-t5s-img">
+                            <span style="font-size: 0.95rem; color: var(--text-muted);">myT5S Platform</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-nav-col">
+                    <h4>Channels &amp; Inquiries</h4>
+                    <ul>
+                        <li><a href="https://www.youtube.com/@tysonmediagroup/?sub_confirmation=1" target="_blank" style="color: #ff4d6d;">Subscribe to Channel &nearr;</a></li>
+                        <li><a href="https://youtube.com/@tysonmediagroup" target="_blank">YouTube Channel &nearr;</a></li>
+                        <li><a href="https://tysonmediagroup.org/#contact" target="_blank">Press Inquiries</a></li>
+                        <li><a href="https://tysonmediagroup.org/#about" target="_blank">Company Information</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Corporate Network & Domain Directory (Branded Accordion) -->
+            <details class="footer-domain-dropdown">
+                <summary class="footer-domain-summary">
+                    <span class="footer-domain-summary-tag">NETWORK DIRECTORY</span>
+                    <span class="footer-domain-summary-title">Corporate Domains &amp; Endpoints (45)</span>
+                    <svg class="footer-domain-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </summary>
+                <div class="footer-domain-dropdown-body">
+                    <div class="footer-domain-columns">
+                        <div class="footer-domain-col">
+                            <h4>TYSON Media Group &amp; Project T6</h4>
+                            <ul>
+                                <li><a href="https://t6graph.tysonmediagroup.org" target="_blank" rel="noopener">t6graph.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://tysonmediagroup.org" target="_blank" rel="noopener">tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://atlantis.tysonmediagroup.org" target="_blank" rel="noopener">atlantis.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://aviation.tysonmediagroup.org" target="_blank" rel="noopener">aviation.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://rpm.tysonmediagroup.org" target="_blank" rel="noopener">rpm.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://100.tysonmediagroup.org" target="_blank" rel="noopener">100.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://3d.tysonmediagroup.org" target="_blank" rel="noopener">3d.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://myt5s.tysonmediagroup.org" target="_blank" rel="noopener">myt5s.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://publish.myt5s.tysonmediagroup.org" target="_blank" rel="noopener">publish.myt5s.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://malik.myt5s.tysonmediagroup.org" target="_blank" rel="noopener">malik.myt5s.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://stim.t5s.tysonmediagroup.org" target="_blank" rel="noopener">stim.t5s.tysonmediagroup.org &nearr;</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-domain-col">
+                            <h4>myT5S Cloud Platform &amp; Publishing</h4>
+                            <ul>
+                                <li><a href="https://myt5s.app" target="_blank" rel="noopener">myt5s.app &nearr;</a></li>
+                                <li><a href="https://media.myt5s.app" target="_blank" rel="noopener">media.myt5s.app &nearr;</a></li>
+                                <li><a href="https://tmg.myt5s.app" target="_blank" rel="noopener">tmg.myt5s.app &nearr;</a></li>
+                                <li><a href="https://tysonmediagroup.myt5s.app" target="_blank" rel="noopener">tysonmediagroup.myt5s.app &nearr;</a></li>
+                                <li><a href="https://dev.myt5s.app" target="_blank" rel="noopener">dev.myt5s.app &nearr;</a></li>
+                                <li><a href="https://rmm.myt5s.app" target="_blank" rel="noopener">rmm.myt5s.app &nearr;</a></li>
+                                <li><a href="https://rmm.cloud.myt5s.app" target="_blank" rel="noopener">rmm.cloud.myt5s.app &nearr;</a></li>
+                                <li><a href="https://publisher.web.myt5s.app" target="_blank" rel="noopener">publisher.web.myt5s.app &nearr;</a></li>
+                                <li><a href="https://publisher.cli.myt5s.app" target="_blank" rel="noopener">publisher.cli.myt5s.app &nearr;</a></li>
+                                <li><a href="https://custine.myt5s.app" target="_blank" rel="noopener">custine.myt5s.app &nearr;</a></li>
+                                <li><a href="https://custine1.myt5s.app" target="_blank" rel="noopener">custine1.myt5s.app &nearr;</a></li>
+                                <li><a href="https://airjedi.custine.myt5s.app" target="_blank" rel="noopener">airjedi.custine.myt5s.app &nearr;</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-domain-col">
+                            <h4>TYSON Racing &bull; Telemetry &amp; Sim</h4>
+                            <ul>
+                                <li><a href="https://tr.tysonmediagroup.org" target="_blank" rel="noopener">tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://323.caymans.tr.tysonmediagroup.org" target="_blank" rel="noopener">323.caymans.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://cayman.tr.tysonmediagroup.org" target="_blank" rel="noopener">cayman.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://424.cars.tr.tysonmediagroup.org" target="_blank" rel="noopener">424.cars.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://11.caymans.tr.tysonmediagroup.org" target="_blank" rel="noopener">11.caymans.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://26.caymans.tr.tysonmediagroup.org" target="_blank" rel="noopener">26.caymans.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://1.trucks.tr.tysonmediagroup.org" target="_blank" rel="noopener">1.trucks.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://525.cars.tr.tysonmediagroup.org" target="_blank" rel="noopener">525.cars.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://8.caymans.tr.tysonmediagroup.org" target="_blank" rel="noopener">8.caymans.tr.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://apex.tr.myt5s.app" target="_blank" rel="noopener">apex.tr.myt5s.app &nearr;</a></li>
+                                <li><a href="https://525french.tr.myt5s.app" target="_blank" rel="noopener">525french.tr.myt5s.app &nearr;</a></li>
+                                <li><a href="https://323jake.tr.myt5s.app" target="_blank" rel="noopener">323jake.tr.myt5s.app &nearr;</a></li>
+                                <li><a href="https://525french.simhub.myt5s.app" target="_blank" rel="noopener">525french.simhub.myt5s.app &nearr;</a></li>
+                                <li><a href="https://525french.stats.myt5s.app" target="_blank" rel="noopener">525french.stats.myt5s.app &nearr;</a></li>
+                                <li><a href="https://323jake.simhub.myt5s.app" target="_blank" rel="noopener">323jake.simhub.myt5s.app &nearr;</a></li>
+                                <li><a href="https://323jake.stats.myt5s.app" target="_blank" rel="noopener">323jake.stats.myt5s.app &nearr;</a></li>
+                                <li><a href="https://323.tysonmediagroup.org" target="_blank" rel="noopener">323.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://323.tysonracing.tysonmediagroup.org" target="_blank" rel="noopener">323.tysonracing.tysonmediagroup.org &nearr;</a></li>
+                                <li><a href="https://323.cloud.myt5s.app" target="_blank" rel="noopener">323.cloud.myt5s.app &nearr;</a></li>
+                                <li><a href="https://323.test.myt5s.app" target="_blank" rel="noopener">323.test.myt5s.app &nearr;</a></li>
+                                <li><a href="https://323.jasonsimhub.myt5s.app" target="_blank" rel="noopener">323.jasonsimhub.myt5s.app &nearr;</a></li>
+                                <li><a href="https://323.cli.stats.myt5s.app" target="_blank" rel="noopener">323.cli.stats.myt5s.app &nearr;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Centered Italic t6graph.tysonmediagroup.org Centerpiece with Bottom PROJECT T6 Logo -->
+            <div class="footer-domain-centerpiece">
+                <img src="assets/logoforbottomofintrotrace.png" alt="PROJECT T6 - TYSON Media Group" class="footer-trace-logo">
+                <div class="footer-domain-title">t6graph.tysonmediagroup.org</div>
+                <div class="footer-domain-subtext">Ad Astra Per Aspera &bull; Stillness in Motion</div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 TYSON Media Group. All rights reserved. Registered division: <code>t6graph.tysonmediagroup.org</code></div>
+                <div class="footer-legal-links">
+                    <a href="https://tysonmediagroup.org/#terms" target="_blank">Terms &amp; Legal</a>
+                    <span>&bull;</span>
+                    <a href="https://tysonmediagroup.org/#privacy" target="_blank">Privacy Notice</a>
+                    <span>&bull;</span>
+                    <a href="https://youtube.com/@tysonmediagroup" target="_blank">@tysonmediagroup</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-  </div>
+    <!-- Intro Bottom Logo (Visible during trace sequence: PROJECT T6) -->
+    <div class="intro-bottom-logo-wrap" id="intro-bottom-logo-wrap">
+        <img src="assets/logoforbottomofintrotrace.png" alt="PROJECT T6 - TYSON Media Group" class="intro-bottom-logo">
+    </div>
 
-  <script src="script.js"></script>
+    <script src="script.js?v=50"></script>
 </body>
 </html>
