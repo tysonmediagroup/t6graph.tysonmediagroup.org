@@ -19,7 +19,7 @@
     timeframe: '24H', // 24H | 7D | 30D | 12M | 5Y | LIVE
     isLoading: false,
     isRealData: false,
-    theme: localStorage.getItem('tyson_theme') || 'noir',
+    theme: localStorage.getItem('tyson_theme_v2') || 'noir-aero',
 
     // Real data arrays directly from Google Trends
     points: [], // Array of { label, fullTime, value, compareValue }
@@ -103,7 +103,7 @@
   function applyTheme(themeName) {
     state.theme = themeName;
     document.documentElement.setAttribute('data-theme', themeName);
-    localStorage.setItem('tyson_theme', themeName);
+    localStorage.setItem('tyson_theme_v2', themeName);
 
     themeOptionCards.forEach(card => {
       if (card.getAttribute('data-theme-choice') === themeName) {
@@ -483,7 +483,19 @@
         axisText: '#86efac'
       };
     }
-    // Default Noir (Midnight Monochrome)
+    if (state.theme === 'noir-aero') {
+      return {
+        primaryStroke: '#ffffff',
+        primaryGlow: 'rgba(255, 255, 255, 0.65)',
+        primaryFill: 'rgba(255, 255, 255, 0.16)',
+        secondaryStroke: '#cbd5e1',
+        secondaryFill: 'rgba(203, 213, 225, 0.06)',
+        gridBase: 'rgba(255, 255, 255, 0.32)',
+        gridLine: 'rgba(255, 255, 255, 0.07)',
+        axisText: '#94a3b8'
+      };
+    }
+    // Midnight Noir (Flat Monochrome)
     return {
       primaryStroke: '#ffffff',
       primaryGlow: 'rgba(255, 255, 255, 0.4)',
