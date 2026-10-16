@@ -74,6 +74,9 @@ const server = http.createServer(async (req, res) => {
       } else if (range === '12M') {
         startTime = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
         granular = false;
+      } else if (range === '5Y') {
+        startTime = new Date(now.getTime() - 5 * 365.25 * 24 * 60 * 60 * 1000);
+        granular = false;
       } else if (range === 'LIVE') {
         startTime = new Date(now.getTime() - 4 * 60 * 60 * 1000); // past 4 hours high-res
         granular = true;
