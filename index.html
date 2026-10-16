@@ -188,19 +188,17 @@
         </div>
     </main>
 
-    <!-- Settings & Appearance Modal -->
-    <div class="settings-modal-overlay" id="settings-modal" aria-hidden="true" role="dialog">
-        <div class="settings-modal-card">
-            <div class="settings-modal-header">
-                <div>
-                    <span class="editorial-tag" style="margin-bottom: 0.25rem; display: block;">SYSTEM PREFERENCES</span>
-                    <h3 class="settings-modal-title">Appearance &amp; Experience</h3>
-                </div>
-                <button class="settings-close-btn" id="settings-modal-close-btn" aria-label="Close Settings">&times;</button>
+    <!-- Sleek Settings & Preferences Modal (Clean, No Emojis) -->
+    <div id="settings-modal" class="settings-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+        <div class="settings-modal-dialog">
+            <button class="settings-modal-close" id="settings-modal-close-btn" aria-label="Close Settings">&times;</button>
+            <div class="settings-header">
+                <span class="editorial-tag" style="margin-bottom: 0.35rem; font-size: 1rem;">PREFERENCES</span>
+                <h3 class="settings-title" id="settings-modal-title">Site Settings &amp; Appearance</h3>
             </div>
 
             <div class="settings-section">
-                <div class="settings-section-title">Visual Theme Engine</div>
+                <div class="settings-section-title">Visual Aesthetic</div>
                 <div class="theme-options-grid">
                     <!-- Option 1: Black Frutiger Aero (Default) -->
                     <div class="theme-option-card selected" data-theme-choice="noir-aero">
@@ -214,7 +212,7 @@
                     <!-- Option 2: Midnight Noir -->
                     <div class="theme-option-card" data-theme-choice="noir">
                         <div class="theme-indicator-row">
-                            <span class="theme-option-title">Midnight Noir</span>
+                            <span class="theme-option-title">Noir Midnight</span>
                             <span class="theme-swatch-circle swatch-noir"></span>
                         </div>
                         <p class="theme-option-desc">Pure flat black monochrome, luxury typography, architectural minimalism.</p>
@@ -415,6 +413,6 @@
         <img src="assets/logoforbottomofintrotrace.png" alt="PROJECT T6 - TYSON Media Group" class="intro-bottom-logo">
     </div>
 
-    <script src="script.js?v=52"></script>
+    <script src="script.js?v=53"></script>
 </body>
 </html>
