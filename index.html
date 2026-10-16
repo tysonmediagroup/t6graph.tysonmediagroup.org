@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROJECT T6 // SONAR &bull; TYSON Media Group</title>
+  <meta name="description" content="T6 Graph Frequency Oscilloscope. Visualizing real-time search velocity and popularity frequencies across the global web. t6graph.tysonmediagroup.org">
+
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Noir Backdrop Vignettes -->
+  <div class="noir-backdrop"></div>
+  <div class="grid-matrix"></div>
+
+  <!-- App Shell -->
+  <div class="app-shell">
+
+    <!-- Brand Header -->
+    <header class="brand-nav">
+      <div class="brand-identity">
+        <img src="assets/TYSONMediaGroupBanner.png" alt="TYSON Media Group" class="brand-logo-img">
+        <div class="brand-titles">
+          <span class="brand-series">PROJECT T6 &bull; FRAMEWORK</span>
+          <h1 class="brand-name">SONAR Frequency Visualizer</h1>
+        </div>
+      </div>
+
+      <div class="nav-system-status">
+        <div class="status-pill">
+          <span class="status-beacon"></span>
+          <span>EDGE SONAR ACTIVE</span>
+        </div>
+        <span style="color: var(--text-dim);">T6GRAPH.TYSONMEDIAGROUP.ORG</span>
+      </div>
+    </header>
+
+    <!-- Controls Strip -->
+    <section class="control-strip">
+      <div class="search-container">
+        <span class="search-prefix">SEARCH QUERY //</span>
+        <input 
+          type="text" 
+          id="queryInput" 
+          class="search-input" 
+          placeholder="Enter search term or keyword (e.g. Tyson Media Group, AI, Quantum)..." 
+          autocomplete="off"
+          spellcheck="false"
+          value="Tyson Media Group"
+        >
+        <div class="search-actions">
+          <button id="btnCompare" class="btn-action" title="Toggle Comparison Waveform">+ COMPARE</button>
+          <button id="btnAudio" class="btn-action" title="Toggle Frequency Audio Synth">&#9834; AUDIO SYNTH</button>
+          <button id="btnRefresh" class="btn-action" title="Query Fresh Metrics">&#8635; SCAN</button>
+        </div>
+
+        <!-- Suggestion Autocomplete Dropdown -->
+        <div id="suggestDropdown" class="suggest-dropdown"></div>
+      </div>
+
+      <!-- Quick Preset Pills -->
+      <div class="preset-row">
+        <span class="preset-label">TREND FEEDS:</span>
+        <button class="preset-pill active" data-term="Tyson Media Group">Tyson Media Group</button>
+        <button class="preset-pill" data-term="Project T6">Project T6</button>
+        <button class="preset-pill" data-term="Artificial Intelligence">Artificial Intelligence</button>
+        <button class="preset-pill" data-term="Formula 1">Formula 1</button>
+        <button class="preset-pill" data-term="Space Exploration">Space Exploration</button>
+        <button class="preset-pill" data-term="Quantum Computing">Quantum Computing</button>
+      </div>
+    </section>
+
+    <!-- Main Oscilloscope Stage -->
+    <main class="stage-container">
+      <canvas id="waveCanvas"></canvas>
+
+      <!-- Floating Telemetry HUD -->
+      <div class="hud-layer">
+        <div class="hud-top">
+          <div class="active-term-card">
+            <span class="active-term-eyebrow">DOMINANT FREQUENCY CARRIER</span>
+            <div id="activeTermTitle" class="active-term-title">Tyson Media Group</div>
+            <div id="activeTermSubtitle" class="active-term-subtitle">POPULARITY INDEX: 94/100 &bull; HARMONIC BAND 3</div>
+          </div>
+
+          <div class="hud-meters">
+            <div class="meter-box">
+              <span class="meter-label">FREQUENCY</span>
+              <div class="meter-value gold"><span id="valFrequency">28.4</span><span class="meter-unit">Hz</span></div>
+            </div>
+            <div class="meter-box">
+              <span class="meter-label">VELOCITY</span>
+              <div class="meter-value"><span id="valVelocity">4.82</span><span class="meter-unit">m/s</span></div>
+            </div>
+            <div class="meter-box">
+              <span class="meter-label">POPULARITY</span>
+              <div class="meter-value gold"><span id="valPopularity">94</span><span class="meter-unit">%</span></div>
+            </div>
+            <div class="meter-box">
+              <span class="meter-label">HARMONICS</span>
+              <div class="meter-value"><span id="valHarmonics">5</span><span class="meter-unit">st</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hud-bottom">
+          <div class="hud-radar-legend">
+            <div class="legend-item">
+              <span class="legend-dot"></span>
+              <span id="legendPrimary">PRIMARY: Tyson Media Group</span>
+            </div>
+            <div class="legend-item" id="legendSecondaryWrap" style="display: none;">
+              <span class="legend-dot secondary"></span>
+              <span id="legendSecondary">SECONDARY: Comparing</span>
+            </div>
+          </div>
+
+          <div class="hud-coordinates">
+            <div id="telemetryTimestamp">SYS TIME: 13:12:00 UTC</div>
+            <div>LATENCY: 12ms &bull; CLOUDFLARE EDGE WORKER</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Brand Footer -->
+    <footer class="brand-footer">
+      <div class="footer-left">
+        <span class="footer-domain">T6GRAPH.TYSONMEDIAGROUP.ORG</span>
+        <span>&copy; 2026 TYSON MEDIA GROUP &bull; ALL RIGHTS RESERVED</span>
+      </div>
+      <div class="footer-links">
+        <span style="font-style: italic; color: var(--gold-light);">"Stillness in Motion"</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

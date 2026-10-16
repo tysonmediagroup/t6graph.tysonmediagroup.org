@@ -1,0 +1,21 @@
+{
+  "name": "t6graph-tysonmediagroup-org",
+  "version": "1.0.0",
+  "description": "PROJECT T6 // SONAR - Google Search Frequency Oscilloscope for TYSON Media Group",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "pages:dev": "npx wrangler pages dev . --port 8788"
+  },
+  "keywords": [
+    "tysonmediagroup",
+    "project-t6",
+    "cloudflare-pages",
+    "oscilloscope",
+    "google-trends",
+    "frequency-visualizer"
+  ],
+  "author": "TYSON Media Group",
+  "license": "UNLICENSED"
+}
