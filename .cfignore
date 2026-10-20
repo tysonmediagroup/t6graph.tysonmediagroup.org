@@ -2,9 +2,13 @@
 .git/
 .github
 .github/
+.wrangler
+.wrangler/
 node_modules
 node_modules/
 package.json
 package-lock.json
 README.md
 server.js
+functions
+functions/
